@@ -28,9 +28,6 @@ import (
 
 // A NetConn is a wrapper around a basic TCP connection.
 type NetConn struct {
-	writeCounter int64
-	readCounter  int64
-
 	conn   net.Conn
 	reader *bufio.Reader
 	writer *bufio.Writer
@@ -41,8 +38,10 @@ type NetConn struct {
 	sMutex sync.Mutex
 	rMutex sync.Mutex
 
-	readLimit   int64
-	readTimeout time.Duration
+	writeCounter int64
+	readCounter  int64
+	readLimit    int64
+	readTimeout  time.Duration
 
 	receiveBuffer bytes.Buffer
 	sendBuffer    bytes.Buffer
